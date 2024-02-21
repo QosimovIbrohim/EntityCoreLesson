@@ -16,14 +16,14 @@ namespace EntityCoreLesson.Application.MyServices.CompanyService
         {
             try
             {
-                var model = new Company()
+                Company? model = new Company()
                 {
                     Name = cmp.Name,
                     Description = cmp.Description,
                     Employee_count = cmp.Employee_count,
                 };
                 await _context.Companys.AddAsync(model);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
                 return "Yaratildi";
             }
             catch
@@ -40,7 +40,7 @@ namespace EntityCoreLesson.Application.MyServices.CompanyService
                 if (md != null)
                 {
                     _context.Companys.Remove(md);
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return true;
                 }
                 return false;
@@ -90,7 +90,7 @@ namespace EntityCoreLesson.Application.MyServices.CompanyService
                 {
                     md.Name = company.Name;
                     md.Description = company.Description;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     return true;
                 }
                 return false;
